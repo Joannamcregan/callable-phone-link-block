@@ -1,0 +1,14 @@
+{
+  "name": "jjcustom-phone-numbers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@wordpress/scripts": "^27.3.0"
+  }
+}
