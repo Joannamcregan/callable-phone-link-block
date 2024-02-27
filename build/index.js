@@ -125,13 +125,9 @@ wp.blocks.registerBlockType("jjcpn/phone-link", {
       type: "string",
       default: "Call Now!"
     },
-    borderSize: {
-      type: "integer",
-      default: 5
-    },
-    borderRadius: {
-      type: "integer",
-      default: 15
+    theAlignment: {
+      type: "string",
+      default: "center"
     }
   },
   supports: {
@@ -143,7 +139,8 @@ wp.blocks.registerBlockType("jjcpn/phone-link", {
       blockGap: true // Enables block spacing UI control for blocks that also use `layout`.
     },
     color: {
-      gradients: true
+      gradients: true,
+      background: false
     },
     typography: {
       fontSize: true,
@@ -152,39 +149,33 @@ wp.blocks.registerBlockType("jjcpn/phone-link", {
   },
   edit: EditPhoneNumber,
   save: function (props) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks.Content, null);
+    return null;
   }
 });
 function EditPhoneNumber(props) {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+  function updateLinkText(value) {
+    props.setAttributes({
+      linkText: value
+    });
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.AlignmentToolbar, {
+    value: props.attributes.theAlignment,
+    onChange: x => props.setAttributes({
+      theAlignment: x
+    })
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
     title: "Phone Number",
     initialOpen: true
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "To input or change your business phone number, click on \"settings\" in the left-side menu of the main admin dashboard, then select \"phone number\"."))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Enter the text you would like to appear in your button"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "text",
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "To input or change your business phone number, click on \"settings\" in the left-side menu of the main admin dashboard, then select \"phone number\"."))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    label: "Link Text",
     placeholder: "Call Now!",
     value: props.attributes.linkText,
-    onChangeComplete: x => props.setAttributes({
-      linkText: x.value
-    })
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
-    title: "Button Border"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Border thickness:"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "text",
-    placeholder: "5",
-    value: props.attributes.borderSize,
-    onChangeComplete: x => props.setAttributes({
-      borderSize: x.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "px")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Border radius:"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "text",
-    placeholder: "15",
-    value: props.attributes.borderRadius,
-    onChangeComplete: x => props.setAttributes({
-      borderRadius: x.value
-    })
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "px")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks, {
-    allowedBlocks: ["core/paragraph", "core/image", "core/button"]
-  }));
+    onChange: updateLinkText
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    style: {
+      textAlign: `${props.attributes.theAlignment}`
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("u", null, props.attributes.linkText)));
 }
 })();
 

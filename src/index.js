@@ -1,5 +1,5 @@
-import {PanelBody, PanelRow} from "@wordpress/components"
-import {InspectorControls, InnerBlocks} from "@wordpress/block-editor"
+import {PanelBody, PanelRow, TextControl} from "@wordpress/components"
+import {InspectorControls, BlockControls, AlignmentToolbar} from "@wordpress/block-editor"
 
 wp.blocks.registerBlockType("jjcpn/phone-link", {
     title: "Phone Number Link",
@@ -7,8 +7,7 @@ wp.blocks.registerBlockType("jjcpn/phone-link", {
     category: "common",
     attributes: {
         linkText: {type: "string", default: "Call Now!"},
-        borderSize: {type: "integer", default: 5},
-        borderRadius: {type: "integer", default: 15}
+        theAlignment: {type: "string", default: "center"}
     },
     supports: {
         spacing: {
@@ -17,7 +16,8 @@ wp.blocks.registerBlockType("jjcpn/phone-link", {
             blockGap: true,  // Enables block spacing UI control for blocks that also use `layout`.
         },
         color: {
-            gradients: true
+            gradients: true,
+            background: false
         },
         typography: {
             fontSize: true,
@@ -26,13 +26,19 @@ wp.blocks.registerBlockType("jjcpn/phone-link", {
     },
     edit: EditPhoneNumber,
     save: function(props) {
-        return <InnerBlocks.Content />
+        return null
     }
 })
 
 function EditPhoneNumber(props) {
+    function updateLinkText(value) {
+        props.setAttributes({ linkText: value })
+    }
     return (
-        <>
+        <div>
+            <BlockControls>
+                <AlignmentToolbar value={props.attributes.theAlignment} onChange={x => props.setAttributes({ theAlignment: x })} />
+            </BlockControls>
             <InspectorControls>
                 <PanelBody title="Phone Number" initialOpen={true}>
                     <PanelRow>
@@ -41,24 +47,15 @@ function EditPhoneNumber(props) {
                         </div>
                     </PanelRow>
                     <PanelRow>
-                        <p>Enter the text you would like to appear in your button</p>
-                        <input type="text" placeholder="Call Now!" value={props.attributes.linkText} onChangeComplete={x => props.setAttributes({linkText: x.value})} />
-                    </PanelRow>
-                </PanelBody>
-                <PanelBody title="Button Border">
-                    <PanelRow>
-                        <p>Border thickness:</p>
-                        <input type="text" placeholder="5" value={props.attributes.borderSize} onChangeComplete={x => props.setAttributes({borderSize: x.value})} />
-                        <span>px</span>
-                    </PanelRow>
-                    <PanelRow>
-                        <p>Border radius:</p>
-                        <input type="text" placeholder="15" value={props.attributes.borderRadius} onChangeComplete={x => props.setAttributes({borderRadius: x.value})} />
-                        <span>px</span>
+                        <TextControl label="Link Text" placeholder="Call Now!" value={props.attributes.linkText} onChange={updateLinkText} />
                     </PanelRow>
                 </PanelBody>
             </InspectorControls>
-            <InnerBlocks allowedBlocks={["core/paragraph", "core/image", "core/button"]} />
-        </>
+            <p style={{textAlign: `${props.attributes.theAlignment}`}}>
+                <u>
+                    {props.attributes.linkText}
+                </u>
+            </p>
+        </div>
     )
 }

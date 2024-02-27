@@ -61,9 +61,7 @@ class Jjcpn {
     function blockHTML($attributes) {
         ob_start(); ?>
         <a href="tel:<?php echo esc_attr(get_option('jjcpn_phone_number')); ?>">
-            <button style="border:<?php echo esc_html($attributes['borderSize']) ?>, border-radius:<?php echo esc_html($attributes['borderRadius']) ?>">
-                <?php echo esc_html($attributes['linkText']) ?>
-            </button>
+            <span>testing</span>
         </a>
         <?php return ob_get_clean();
     }
