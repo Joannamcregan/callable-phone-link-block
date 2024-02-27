@@ -19,6 +19,8 @@ class Jjcpn {
     add_settings_section('jjcpn_setting_section', null, null, 'phone-number-settings-page');
     add_settings_field('jjcpn_phone_number', 'Phone Number:', array($this, 'phoneNumberInputHTML'), 'phone-number-settings-page', 'jjcpn_setting_section');
     register_setting('phonenumberlink', 'jjcpn_phone_number', array('sanitize_callback' => array($this, 'sanitizeAndValidateNumber'), 'default' => ''));
+    add_settings_field('jjcpn_phone_link_text', 'Link Text:', array($this, 'linkTextInputHTML'), 'phone-number-settings-page', 'jjcpn_setting_section');
+    register_setting('phonenumberlink', 'jjcpn_phone_link_text', array('sanitize_callback' => 'sanitize_text_field', 'default' => 'Call Now!'));
   }
 
   function sanitizeAndValidateNumber($input){
@@ -30,6 +32,10 @@ class Jjcpn {
         return esc_attr(get_option('jjcpn_phone_number'));
     }
   }
+
+  function linkTextInputHTML(){
+    ?><input type="text" name='jjcpn_phone_link_text' placeholder="Call Now!" value="<?php echo esc_attr(get_option('jjcpn_phone_link_text')); ?>"></input>
+  <?php }
 
   function phoneNumberInputHTML(){
     ?><input type="text" name='jjcpn_phone_number' placeholder="example: 7775555555" value="<?php echo esc_attr(get_option('jjcpn_phone_number')); ?>"></input>
@@ -60,9 +66,12 @@ class Jjcpn {
 
     function blockHTML($attributes) {
         ob_start(); ?>
-        <a href="tel:<?php echo esc_attr(get_option('jjcpn_phone_number')); ?>">
-            <span>testing</span>
-        </a>
+        <!-- <div style="text-align: <?php echo esc_html($attributes['theAlignment']); ?>"> -->
+        <div style="text-align: center">
+            <a href="tel:<?php echo esc_attr(get_option('jjcpn_phone_number')); ?>">
+                <?php echo esc_attr(get_option('jjcpn_phone_link_text')); ?>
+            </a>
+        </div>
         <?php return ob_get_clean();
     }
 }

@@ -120,16 +120,9 @@ wp.blocks.registerBlockType("jjcpn/phone-link", {
   title: "Phone Number Link",
   icon: "phone",
   category: "common",
-  attributes: {
-    linkText: {
-      type: "string",
-      default: "Call Now!"
-    },
-    theAlignment: {
-      type: "string",
-      default: "center"
-    }
-  },
+  // attributes: {
+  //     theAlignment: {type: "string", default: "center"}        
+  // },
   supports: {
     spacing: {
       margin: true,
@@ -145,7 +138,8 @@ wp.blocks.registerBlockType("jjcpn/phone-link", {
     typography: {
       fontSize: true,
       lineHeight: true
-    }
+    },
+    align: true
   },
   edit: EditPhoneNumber,
   save: function (props) {
@@ -153,29 +147,19 @@ wp.blocks.registerBlockType("jjcpn/phone-link", {
   }
 });
 function EditPhoneNumber(props) {
-  function updateLinkText(value) {
+  function updateLinkAlignment(value) {
     props.setAttributes({
-      linkText: value
+      theAlignment: value
     });
   }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.AlignmentToolbar, {
-    value: props.attributes.theAlignment,
-    onChange: x => props.setAttributes({
-      theAlignment: x
-    })
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
     title: "Phone Number",
     initialOpen: true
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "To input or change your business phone number, click on \"settings\" in the left-side menu of the main admin dashboard, then select \"phone number\"."))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-    label: "Link Text",
-    placeholder: "Call Now!",
-    value: props.attributes.linkText,
-    onChange: updateLinkText
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "To input or change your business phone number, click on \"settings\" in the left-side menu of the main admin dashboard, then select \"phone number\"."))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     style: {
-      textAlign: `${props.attributes.theAlignment}`
+      textAlign: 'center'
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("u", null, props.attributes.linkText)));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("u", null, "Your Text Here (see side panel for instructions)")));
 }
 })();
 

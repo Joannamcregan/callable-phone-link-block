@@ -1,14 +1,13 @@
-import {PanelBody, PanelRow, TextControl} from "@wordpress/components"
+import {PanelBody, PanelRow} from "@wordpress/components"
 import {InspectorControls, BlockControls, AlignmentToolbar} from "@wordpress/block-editor"
 
 wp.blocks.registerBlockType("jjcpn/phone-link", {
     title: "Phone Number Link",
     icon: "phone",
     category: "common",
-    attributes: {
-        linkText: {type: "string", default: "Call Now!"},
-        theAlignment: {type: "string", default: "center"}
-    },
+    // attributes: {
+    //     theAlignment: {type: "string", default: "center"}        
+    // },
     supports: {
         spacing: {
             margin: true,  // Enable margin UI control.
@@ -21,8 +20,9 @@ wp.blocks.registerBlockType("jjcpn/phone-link", {
         },
         typography: {
             fontSize: true,
-            lineHeight: true,
+            lineHeight: true
         },
+        align: true
     },
     edit: EditPhoneNumber,
     save: function(props) {
@@ -31,14 +31,14 @@ wp.blocks.registerBlockType("jjcpn/phone-link", {
 })
 
 function EditPhoneNumber(props) {
-    function updateLinkText(value) {
-        props.setAttributes({ linkText: value })
+    function updateLinkAlignment(value) {
+        props.setAttributes({ theAlignment: value })
     }
     return (
         <div>
-            <BlockControls>
-                <AlignmentToolbar value={props.attributes.theAlignment} onChange={x => props.setAttributes({ theAlignment: x })} />
-            </BlockControls>
+            {/* <BlockControls>
+                <AlignmentToolbar value={props.attributes.theAlignment} onChange={updateLinkAlignment} />
+            </BlockControls> */}
             <InspectorControls>
                 <PanelBody title="Phone Number" initialOpen={true}>
                     <PanelRow>
@@ -46,14 +46,12 @@ function EditPhoneNumber(props) {
                             <p>To input or change your business phone number, click on "settings" in the left-side menu of the main admin dashboard, then select "phone number".</p>
                         </div>
                     </PanelRow>
-                    <PanelRow>
-                        <TextControl label="Link Text" placeholder="Call Now!" value={props.attributes.linkText} onChange={updateLinkText} />
-                    </PanelRow>
                 </PanelBody>
             </InspectorControls>
-            <p style={{textAlign: `${props.attributes.theAlignment}`}}>
+            {/* <p style={{textAlign: `${props.attributes.theAlignment}`}}> */}
+            <p style={{textAlign: 'center'}}>
                 <u>
-                    {props.attributes.linkText}
+                    Your Text Here (see side panel for instructions)
                 </u>
             </p>
         </div>
