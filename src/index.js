@@ -1,5 +1,7 @@
+import "./index.css"
 import {PanelBody, PanelRow} from "@wordpress/components"
 import {InspectorControls, BlockControls, AlignmentToolbar} from "@wordpress/block-editor"
+import icon from "../images/phone.svg"
 
 wp.blocks.registerBlockType("jjcpn/phone-link", {
     title: "Phone Number Link",
@@ -57,3 +59,48 @@ function EditPhoneNumber(props) {
         </div>
     )
 }
+
+wp.blocks.registerBlockType("jjcpn/phone-icon", {
+    title: "Call Now Icon",
+    icon: "phone",
+    category: "common",
+    supports: {
+        spacing: {
+            margin: true,  // Enable margin UI control.
+            padding: true, // Enable padding UI control.
+            blockGap: true,  // Enables block spacing UI control for blocks that also use `layout`.
+        },
+        color: {
+            gradients: true,
+            background: false
+        },
+        typography: {
+            fontSize: true,
+            lineHeight: true
+        },
+        align: true
+    },
+    edit: function(props){
+        return (
+            <>
+                <InspectorControls>
+                    <PanelBody title="Phone Number" initialOpen={true}>
+                        <PanelRow>
+                            <div>
+                                <p>To input or change your business phone number, click on "settings" in the left-side menu of the main admin dashboard, then select "phone number".</p>
+                                <p style={{color: 'red'}}>Note: this icon will only appear on small screens.</p>
+                            </div>
+                        </PanelRow>
+                    </PanelBody>
+                </InspectorControls>
+                <div style={{width:'60px', border: 'solid black 5px', borderRadius: '15px', background: '#57f542',}}>
+                    <img src={icon} alt="a simple phone icon"/>
+                </div>
+            </>
+            
+        )
+    },
+    save: function(props) {
+        return null
+    }
+})

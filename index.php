@@ -58,18 +58,33 @@ class Jjcpn {
 
   function adminAssets() {
     wp_enqueue_script('jjcustomphonenumber', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor', 'wp-components'));
+    wp_enqueue_style('jjcustonphoneiconcss', plugin_dir_url(__FILE__) . 'build/index.css');
     register_block_type('jjcpn/phone-link', array(
         'editor_script' => 'jjcustomphonenumber',
         'render_callback' => array($this, 'blockHTML')
+      ));
+      register_block_type('jjcpn/phone-icon', array(
+        'editor_script' => 'jjcustomphoneicon',
+        'editor_style' => 'jjcustonphoneiconcss',
+        'render_callback' => array($this, 'iconBlockHTML')
       ));
     }
 
     function blockHTML($attributes) {
         ob_start(); ?>
-        <!-- <div style="text-align: <?php echo esc_html($attributes['theAlignment']); ?>"> -->
         <div style="text-align: center">
             <a href="tel:<?php echo esc_attr(get_option('jjcpn_phone_number')); ?>">
                 <?php echo esc_attr(get_option('jjcpn_phone_link_text')); ?>
+            </a>
+        </div>
+        <?php return ob_get_clean();
+    }
+
+    function iconBlockHTML($attributes) {
+        ob_start(); ?>
+        <div class="jjcpn--phone-icon-container">
+            <a href="tel:<?php echo esc_attr(get_option('jjcpn_phone_number')); ?>">
+                <img src="<?php echo plugins_url('/images/phone.svg', __FILE__) ?>" alt="a simple phone icon" class="jjcpn--phone-icon" />
             </a>
         </div>
         <?php return ob_get_clean();

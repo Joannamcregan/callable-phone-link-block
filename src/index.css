@@ -1,0 +1,13 @@
+.jjcpn--phone-icon-container{
+    width: 60px;
+    border: solid black 5px;
+    border-radius: 15px;
+    background: #57f542;
+    visibility: visible;
+}
+
+@media screen and (min-width: 480px) {
+    .jjcpn--phone-icon-container{
+        visibility: hidden;
+    }
+  }
